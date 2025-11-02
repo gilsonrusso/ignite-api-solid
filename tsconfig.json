@@ -1,0 +1,48 @@
+{
+  // 👉 Mais sobre o tsconfig: https://aka.ms/tsconfig
+  "compilerOptions": {
+    /* =====================
+     * 🧩 ESTRUTURA DE ARQUIVOS
+     * ===================== */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* =====================
+     * ⚙️ COMPILAÇÃO / RUNTIME
+     * ===================== */
+    "target": "ES2022", // Suporte a recursos modernos do JS
+    "module": "NodeNext", // Compatível com "type": "module"
+    "moduleResolution": "NodeNext",
+    "types": ["node"], // Inclui declarações Node.js
+    "lib": ["ES2022"], // Bibliotecas JS modernas
+    "esModuleInterop": true, // Permite importar módulos CommonJS facilmente
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true, // Permite importar JSON diretamente
+    "skipLibCheck": true, // Evita erros em dependências externas
+
+    /* =====================
+     * 🧠 TYPE CHECKING
+     * ===================== */
+    "strict": true, // Ativa todas as verificações estritas
+    "noImplicitAny": true, // Evita tipos "any" implícitos
+    "noUncheckedIndexedAccess": true, // Arrays e objetos mais seguros
+    "exactOptionalPropertyTypes": true, // Exige definição precisa de opcionais
+    "noUnusedLocals": true, // Avisa variáveis não usadas
+    "noUnusedParameters": true, // Avisa parâmetros não usados
+    "noImplicitReturns": true, // Exige retorno explícito nas funções
+    "noFallthroughCasesInSwitch": true, // Evita erro em switch sem break
+    "forceConsistentCasingInFileNames": true, // Case-sensitive nos imports
+
+    /* =====================
+     * 📦 OUTROS
+     * ===================== */
+    "sourceMap": true, // Gera mapas de origem para debug
+    "declaration": true, // Gera .d.ts para tipagem externa
+    "declarationMap": true, // Gera mapas para os .d.ts
+    "isolatedModules": true, // Necessário pro TSX
+    "moduleDetection": "force", // Detecção automática de módulos
+    "noUncheckedSideEffectImports": true // Evita imports só com efeitos colaterais
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "coverage"]
+}
