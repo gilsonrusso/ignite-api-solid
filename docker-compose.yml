@@ -1,18 +1,44 @@
-version: '3.8'
-
 services:
-  db:
-    image: bitnami/postgresql:latest
-    container_name: api-solid-pg
+  mongo1:
+    image: mongo:6.0
+    container_name: mongo1
+    hostname: mongo1
     ports:
-      - "5432:5432"
-    environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=apisolid
+      - "27017:27017"
+    # no MONGO_INITDB_ROOT_* here: we'll create the admin user after the ReplicaSet is initiated
+    command: ["mongod", "--keyFile", "/data/mongo-keyfile/mongo-key", "--replSet", "rs0", "--bind_ip_all"]
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./data/mongo1:/data/db
+      - ./init-replica.sh:/docker-entrypoint-initdb.d/init-replica.sh
+      - ./mongo-key:/data/mongo-keyfile/mongo-key:ro
+    # keyfile mounted so internal auth can function between nodes
+    networks:
+      - mongo-cluster
 
-volumes:
-  postgres_data:
-    driver: local
+  mongo2:
+    image: mongo:6.0
+    container_name: mongo2
+    hostname: mongo2
+    # no MONGO_INITDB_ROOT_* here
+    command: ["mongod", "--keyFile", "/data/mongo-keyfile/mongo-key", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - ./data/mongo2:/data/db
+      - ./mongo-key:/data/mongo-keyfile/mongo-key:ro
+    networks:
+      - mongo-cluster
+
+  mongo3:
+    image: mongo:6.0
+    container_name: mongo3
+    hostname: mongo3
+    # no MONGO_INITDB_ROOT_* here
+    command: ["mongod", "--keyFile", "/data/mongo-keyfile/mongo-key", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - ./data/mongo3:/data/db
+      - ./mongo-key:/data/mongo-keyfile/mongo-key:ro
+    networks:
+      - mongo-cluster
+
+networks:
+  mongo-cluster:
+    driver: bridge

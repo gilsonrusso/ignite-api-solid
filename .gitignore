@@ -2,3 +2,7 @@ node_modules
 db/app.db
 .env
 /src/generated/prisma
+
+/generated/prisma
+
+mongo-key
