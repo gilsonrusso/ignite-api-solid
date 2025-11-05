@@ -69,3 +69,56 @@ Isso iniciará o servidor em `http://localhost:3333`.
 ### Com Docker
 
 Para executar a aplicação com Docker, você precisará adicionar um serviço para a API no seu `docker-compose.yml`. No momento, o `docker-compose.yml` contém apenas o banco de dados.
+
+## Comandos MongoDB Replica Set
+
+Para verificar o status do replica set, você pode usar o seguinte comando:
+
+```bash
+docker exec -it mongo1 mongosh --eval "rs.status()"
+```
+
+### Testando a Replicação
+
+Você pode testar a replicação de dados inserindo um documento em um nó e verificando se ele aparece nos outros.
+
+1.  **Acesse o `mongo1`:**
+
+    ```bash
+    docker exec -it mongo1 mongosh
+    ```
+
+2.  **Dentro do `mongosh`, crie um banco de dados e uma coleção, e insira um documento:**
+
+    ```javascript
+    use myNewDB
+    db.createCollection("users")
+    db.users.insertOne({ name: "Gilson", email: "gilson@example.com" })
+    db.users.find()
+    ```
+
+3.  **Saia do `mongo1` e acesse o `mongo2` para verificar se os dados foram replicados:**
+
+    ```bash
+    docker exec -it mongo2 mongosh
+    ```
+
+4.  **Dentro do `mongosh` do `mongo2`, verifique os dados:**
+
+    ```javascript
+    use myNewDB
+    db.users.find()
+    ```
+
+5.  **Faça o mesmo para o `mongo3`:**
+
+    ```bash
+    docker exec -it mongo3 mongosh
+    ```
+
+6.  **Dentro do `mongosh` do `mongo3`, verifique os dados:**
+
+    ```javascript
+    use myNewDB
+    db.users.find()
+    ```

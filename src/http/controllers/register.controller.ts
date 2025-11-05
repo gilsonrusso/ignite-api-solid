@@ -6,20 +6,20 @@ export async function registerController(request: FastifyRequest, reply: Fastify
   const registerUserSchema = z.object({
     name: z.string(),
     email: z.email(),
-    password: z.string().min(6),
   });
 
-  const { name, email, password } = registerUserSchema.parse(request.body);
+  const { name, email } = registerUserSchema.parse(request.body);
 
   try {
-    await registerUseCase({
+    const user = await registerUseCase({
       name,
       email,
-      password,
+    });
+
+    return reply.status(201).send({
+      user,
     });
   } catch (error) {
     return reply.status(409).send({ message: (error as Error).message });
   }
-
-  return reply.status(201).send();
 }

@@ -6,3 +6,4 @@ db/app.db
 /generated/prisma
 
 mongo-key
+data
