@@ -1,4 +1,4 @@
-import { prisma } from '../lib/prisma.js';
+import { prismaClient } from "../lib/prisma.ts";
 
 interface RegisterUseCaseRequest {
   name: string;
@@ -6,17 +6,17 @@ interface RegisterUseCaseRequest {
 }
 
 export async function registerUseCase({ email, name }: RegisterUseCaseRequest) {
-  const userWithSameEmail = await prisma.user.findUnique({
+  const userWithSameEmail = await prismaClient.user.findUnique({
     where: {
       email,
     },
   });
 
   if (userWithSameEmail) {
-    throw new Error('E-mail already registered.');
+    throw new Error("E-mail already registered.");
   }
 
-  const user = await prisma.user.create({
+  const user = await prismaClient.user.create({
     data: {
       name,
       email,

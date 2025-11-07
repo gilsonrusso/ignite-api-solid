@@ -1,9 +1,10 @@
-import { app } from './app.js';
-import { env } from './env/index.js';
+import "dotenv/config";
+import { app } from "./app.ts";
+import { env } from "./env/index.ts";
 
 app
   .listen({
-    host: '0.0.0.0',
+    host: "0.0.0.0",
     port: env.PORT,
   })
   .then(() => {

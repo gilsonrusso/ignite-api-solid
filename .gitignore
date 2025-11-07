@@ -7,3 +7,5 @@ db/app.db
 
 mongo-key
 data
+
+/generated/prisma

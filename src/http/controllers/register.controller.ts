@@ -1,8 +1,11 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
-import z from 'zod';
-import { registerUseCase } from '../../use-cases/register.use-cases.js';
+import type { FastifyReply, FastifyRequest } from "fastify";
+import z from "zod";
+import { registerUseCase } from "../../use-cases/register.use-cases.ts";
 
-export async function registerController(request: FastifyRequest, reply: FastifyReply) {
+export async function registerController(
+  request: FastifyRequest,
+  reply: FastifyReply,
+) {
   const registerUserSchema = z.object({
     name: z.string(),
     email: z.email(),
