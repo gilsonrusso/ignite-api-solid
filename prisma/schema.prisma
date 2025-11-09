@@ -4,13 +4,42 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password_hash String
+  created_at    DateTime  @default(now())
+  checkIns      CheckIn[]
+
+  @@map("users")
+}
+
+model CheckIn {
+  id           String    @id @default(cuid())
+  created_at   DateTime  @default(now())
+  validated_at DateTime?
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String @map("user_id")
+  gym     Gym    @relation(fields: [gym_id], references: [id])
+  gym_id  String @map("gym_id")
+
+  @@map("check_ins")
+}
+
+model Gym {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  phone       String
+  latitude    Float
+  longitude   Float
+  CheckIn     CheckIn[]
+
+  @@map("gyms")
 }

@@ -1,11 +1,8 @@
 node_modules
-db/app.db
+build
+
+/generated/prisma
+
 .env
-/src/generated/prisma
 
-/generated/prisma
-
-mongo-key
-data
-
-/generated/prisma
+coverage

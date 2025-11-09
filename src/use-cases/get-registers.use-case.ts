@@ -5,8 +5,8 @@ interface RegisterUseCaseResponse {
   users: User[];
 }
 
-export async function getRegistersUseCase(): Promise<RegisterUseCaseResponse>  {
-  const users = await prismaClient.user.findMany({take: 10});
+export async function getRegistersUseCase(): Promise<RegisterUseCaseResponse> {
+  const users = await prismaClient.user.findMany({ take: 10 });
 
   return { users };
 }

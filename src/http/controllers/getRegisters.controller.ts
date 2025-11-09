@@ -1,4 +1,4 @@
-import { getRegistersUseCase } from "@/use-cases/get-registers.use-cases.ts";
+import { getRegistersUseCase } from "@/use-cases/get-registers.use-case.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 export async function getRegistersController(
