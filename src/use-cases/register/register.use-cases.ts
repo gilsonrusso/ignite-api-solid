@@ -1,7 +1,7 @@
-import type { IUsersRepository } from "@/repositories/IUserRepository.ts";
+import type { IUsersRepository } from "@/repositories/IUser.repository.ts";
 import { hash } from "bcryptjs";
 import type { User } from "generated/prisma/client.ts";
-import { UserAlreadyExistsError } from "./errors/user-already-exists.error.ts";
+import { UserAlreadyExistsError } from "../errors/user-already-exists.error.ts";
 
 interface RegisterUseCaseRequest {
   name: string;

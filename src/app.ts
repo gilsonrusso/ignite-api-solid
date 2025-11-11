@@ -34,7 +34,7 @@ app.setErrorHandler((error, _request, replay) => {
   if (env.NODE_ENV !== "production") {
     console.error(error);
   } else {
-    // o erro pode ser enviado para alguma ferramenta de logs. 
+    // o erro pode ser enviado para alguma ferramenta de logs.
   }
 
   return replay.status(500).send({ message: "Internal server error." });

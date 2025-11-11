@@ -3,13 +3,13 @@
 ## Requisitos Funcionais - RFs (Funcionalidade da aplicaca, oque é possivel o usuario fazer na aplicacao. nao confunda as funcionalidades com rotas da aplicacao. nao necesariamente)
 
 - [x] Deve ser possivel se cadastrar.
-- [ ] Deve ser possivel se autenticar.
-- [ ] Deve ser possivel obter o perfil de um usuario logado.
+- [x] Deve ser possivel se autenticar.
+- [x] Deve ser possivel obter o perfil de um usuario logado.
 - [ ] Deve ser possivel obter o numero de ckeck-ins realizados pelo o usuario logado.
 - [ ] Deve ser possivel o usuario ober seu historico de check-ins.
 - [ ] Deve ser possivel o usuario buscar academias proximas.
 - [ ] Deve ser possivel o usuario buscar academias pelo nome.
-- [ ] Deve ser possivel o usuario realizar o check-in em uma academia
+- [x] Deve ser possivel o usuario realizar o check-in em uma academia
 - [ ] Deve ser possivel validar o check-in de um usuario.
 - [ ] Deve ser possivel cadastrar uma academia
  

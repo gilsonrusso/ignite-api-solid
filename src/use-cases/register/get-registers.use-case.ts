@@ -1,5 +1,5 @@
 import type { User } from "generated/prisma/client.ts";
-import { prismaClient } from "../lib/prisma.ts";
+import { prismaClient } from "../../lib/prisma.ts";
 
 interface RegisterUseCaseResponse {
   users: User[];
