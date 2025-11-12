@@ -1,14 +1,19 @@
-import type { Gym } from "generated/prisma/client.ts";
-import type { GymCreateInput } from "generated/prisma/models.ts";
+import type { Gym, Prisma } from "generated/prisma/client.ts";
 import { randomUUID } from "node:crypto";
 import type { IGymsRepository } from "../IGyms.repository.ts";
 
 export class InMemoryGymsRepository implements IGymsRepository {
   public items: Gym[] = [];
 
-  async create(data: GymCreateInput) {
+  async searchMany(query: string, page: number) {
+    return this.items
+      .filter((item) => item.title.includes(query))
+      .slice((page - 1) * 20, page * 20);
+  }
+
+  async create(data: Prisma.GymCreateInput) {
     const gym: Gym = {
-      id: randomUUID(),
+      id: data.id ?? randomUUID(),
       title: data.title,
       description: data.description ?? null,
       phone: data.phone ?? null,
