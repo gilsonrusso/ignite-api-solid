@@ -1,5 +1,5 @@
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists.error.ts";
-import { makeRegisterUseCase } from "@/use-cases/factories/make-register.ts";
+import { makeRegisterUseCase } from "@/use-cases/factories/makeRegisterUseCase.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 

@@ -1,4 +1,4 @@
-import type { IGymsRepository } from "@/repositories/IGyms.ts";
+import type { IGymsRepository } from "@/repositories/IGymsRepository.ts";
 import type { Gym } from "generated/prisma/client.ts";
 
 interface GetNearbyGymsUseCaseRequest {

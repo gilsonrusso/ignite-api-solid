@@ -2,7 +2,7 @@ import type { ICoordinates } from "@/types/coordinates.ts";
 import { getDistanceBetweenCoordinates } from "@/utils/get-distance-between-coordinates.ts";
 import type { Gym, Prisma } from "generated/prisma/client.ts";
 import { randomUUID } from "node:crypto";
-import type { IGymsRepository } from "../IGyms.ts";
+import type { IGymsRepository } from "../IGymsRepository.ts";
 
 export class InMemoryGymsRepository implements IGymsRepository {
   public items: Gym[] = [];

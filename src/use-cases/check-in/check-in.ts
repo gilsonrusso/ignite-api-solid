@@ -1,5 +1,5 @@
-import type { ICheckInRepository } from "@/repositories/ICheck-ins.ts";
-import type { IGymsRepository } from "@/repositories/IGyms.ts";
+import type { ICheckInRepository } from "@/repositories/ICheckInsRepository.ts";
+import type { IGymsRepository } from "@/repositories/IGymsRepository.ts";
 import { getDistanceBetweenCoordinates } from "@/utils/get-distance-between-coordinates.ts";
 import type { CheckIn } from "generated/prisma/browser.ts";
 import { MaxDistanceError } from "../errors/max-distance-error.ts";

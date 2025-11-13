@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials.error.ts";
-import { makeAuthenticateUseCase } from "@/use-cases/factories/make-authenticate.ts";
+import { makeAuthenticateUseCase } from "@/use-cases/factories/makeAuthenticateUseCase.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 

@@ -1,4 +1,4 @@
-import { getRegistersUseCase } from "@/use-cases/register/get-registers..ts";
+import { getUserProfileUseCase } from "@/use-cases/register/get-user-profile.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 export async function getRegistersController(
@@ -6,7 +6,7 @@ export async function getRegistersController(
   reply: FastifyReply,
 ) {
   try {
-    const users = await getRegistersUseCase();
+    const users = await getUserProfileUseCase();
 
     return reply.status(200).send(users);
   } catch (error) {

@@ -2,10 +2,32 @@ import dayjs from "dayjs";
 import type { CheckIn } from "generated/prisma/client.ts";
 import type { CheckInUncheckedCreateInput } from "generated/prisma/models.ts";
 import { randomUUID } from "node:crypto";
-import type { ICheckInRepository } from "../ICheck-ins.ts";
+import type { ICheckInRepository } from "../ICheckInsRepository.ts";
 
 export class InMemoryCheckInsRepository implements ICheckInRepository {
   public items: CheckIn[] = [];
+
+  async save(checkIn: CheckIn) {
+    const checkInIndex = this.items.findIndex((item) => item.id === checkIn.id);
+
+    if (checkInIndex >= 0) {
+      this.items[checkInIndex] = checkIn;
+    }
+
+    // this.items.push(checkIn);
+
+    return checkIn;
+  }
+
+  async findById(id: string) {
+    const checkIn = this.items.find((item) => item.id === id);
+
+    if (!checkIn) {
+      return null;
+    }
+
+    return checkIn;
+  }
 
   async countByUserId(userId: string) {
     return this.items.filter((item) => item.user_id === userId).length;
