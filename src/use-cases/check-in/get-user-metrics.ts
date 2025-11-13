@@ -1,4 +1,4 @@
-import type { ICheckInRepository } from "@/repositories/ICheck-ins.repository.ts";
+import type { ICheckInRepository } from "@/repositories/ICheck-ins.ts";
 
 interface GetUserMetricsUseCaseRequest {
   userId: string;

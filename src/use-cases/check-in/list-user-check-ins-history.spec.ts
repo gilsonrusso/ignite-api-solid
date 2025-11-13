@@ -1,6 +1,6 @@
-import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins.repository.ts";
+import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins.ts";
 import { beforeEach, describe, expect, it } from "vitest";
-import { ListUserCheckInsHistoryUseCase } from "./list-user-check-ins-history.use-case.ts";
+import { ListUserCheckInsHistoryUseCase } from "./list-user-check-ins-history.ts";
 
 describe("List User Check-ins History Use Case", () => {
   let checkInRepository: InMemoryCheckInsRepository;

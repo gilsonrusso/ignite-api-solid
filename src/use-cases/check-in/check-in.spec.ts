@@ -1,9 +1,9 @@
-import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins.repository.ts";
-import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms.repository.ts";
+import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins.ts";
+import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms.ts";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { MaxDistanceError } from "../errors/max-distance-error.ts";
 import { MaxNumberOfCheckInsError } from "../errors/max-number-0f-check-ins-error.ts";
-import { CheckInUseCase } from "./check-in.use-case.ts";
+import { CheckInUseCase } from "./check-in.ts";
 
 const userLat = -3.1124314;
 const userLog = -60.0375103;

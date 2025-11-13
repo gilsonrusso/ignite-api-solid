@@ -1,17 +1,9 @@
-export interface Coordinate {
-  latitude: number;
-  longitude: number;
-}
-
-interface GetDistanceBetweenCoordinatesProps {
-  from: Coordinate;
-  to: Coordinate;
-}
+import type { IGetDistanceBetweenCoordinates } from "@/types/coordinates.ts";
 
 export function getDistanceBetweenCoordinates({
   from,
   to,
-}: GetDistanceBetweenCoordinatesProps) {
+}: IGetDistanceBetweenCoordinates) {
   if (from.latitude === to.latitude && from.longitude === to.longitude) {
     return 0;
   }

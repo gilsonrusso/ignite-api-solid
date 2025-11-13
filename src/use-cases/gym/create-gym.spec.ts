@@ -1,6 +1,6 @@
-import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms.repository.ts";
+import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms.ts";
 import { beforeEach, describe, expect, it } from "vitest";
-import { CreateGymUseCase } from "./create-gym.use-case.ts";
+import { CreateGymUseCase } from "./create-gym.ts";
 
 describe("Gym Use Case", () => {
   let gymsRepository: InMemoryGymsRepository;

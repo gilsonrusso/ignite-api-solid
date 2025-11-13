@@ -1,7 +1,9 @@
+import type { ICoordinates } from "@/types/coordinates.ts";
 import type { Gym, Prisma } from "generated/prisma/client.ts";
 
 export interface IGymsRepository {
   findById(id: string): Promise<Gym | null>;
+  findManyNearby(params: ICoordinates): Promise<Gym[]>;
   searchMany(query: string, page: number): Promise<Gym[]>;
   create(data: Prisma.GymCreateInput): Promise<Gym>;
 }

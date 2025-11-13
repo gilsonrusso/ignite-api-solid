@@ -1,7 +1,7 @@
-import { randomUUID } from "node:crypto";
 import type { User } from "generated/prisma/client.ts";
 import type { UserCreateInput } from "generated/prisma/models.ts";
-import type { IUsersRepository } from "../IUser.repository.ts";
+import { randomUUID } from "node:crypto";
+import type { IUsersRepository } from "../IUser.ts";
 
 export class InMemoryUsersRepository implements IUsersRepository {
   public items: User[] = [];

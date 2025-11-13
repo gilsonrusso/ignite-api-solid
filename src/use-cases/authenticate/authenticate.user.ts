@@ -1,8 +1,8 @@
-import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users.repository.ts";
+import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users.ts";
 import { hash } from "bcryptjs";
 import { beforeEach, describe, expect, it } from "vitest";
 import { InvalidCredentialsError } from "../errors/invalid-credentials.error.ts";
-import { AuthenticateUseCase } from "./authenticate.use-case.ts";
+import { AuthenticateUseCase } from "./authenticate.ts";
 
 describe("Authenticate Use Case", () => {
   let usersRepository: InMemoryUsersRepository;

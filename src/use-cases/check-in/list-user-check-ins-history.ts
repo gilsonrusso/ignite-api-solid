@@ -1,4 +1,4 @@
-import type { ICheckInRepository } from "@/repositories/ICheck-ins.repository.ts";
+import type { ICheckInRepository } from "@/repositories/ICheck-ins.ts";
 import type { CheckIn } from "generated/prisma/browser.ts";
 
 interface ListUserCheckInsHistoryUseCaseRequest {

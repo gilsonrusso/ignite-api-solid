@@ -1,4 +1,4 @@
-import type { IGymsRepository } from "@/repositories/IGyms.repository.ts";
+import type { IGymsRepository } from "@/repositories/IGyms.ts";
 import type { Gym } from "generated/prisma/client.ts";
 
 interface CreateGymUseCaseRequest {
