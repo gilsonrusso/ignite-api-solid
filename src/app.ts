@@ -1,4 +1,5 @@
 import fastifyCors from "@fastify/cors";
+import fastifyJwt from "@fastify/jwt";
 import fastify from "fastify";
 import {
   serializerCompiler,
@@ -7,9 +8,14 @@ import {
 } from "fastify-type-provider-zod";
 import { ZodError } from "zod";
 import { env } from "./env/index.ts";
-import { appRoutes } from "./http/routes.ts";
+import { gymsRoutes } from "./http/controllers/gyms/routes.ts";
+import { usersRoutes } from "./http/controllers/users/routes.ts";
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
+
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET,
+});
 
 app.register(fastifyCors, {
   origin: "*",
@@ -22,7 +28,8 @@ app.get("/health", (_, replay) => {
   return replay.status(200).send({ message: "API OK" });
 });
 
-app.register(appRoutes);
+app.register(usersRoutes);
+app.register(gymsRoutes);
 
 app.setErrorHandler((error, _request, replay) => {
   if (error instanceof ZodError) {

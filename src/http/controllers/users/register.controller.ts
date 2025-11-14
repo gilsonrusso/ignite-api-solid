@@ -18,15 +18,13 @@ export async function registerController(
   try {
     const registerUseCase = makeRegisterUseCase();
 
-    const user = await registerUseCase.execute({
+    await registerUseCase.execute({
       name,
       email,
       password,
     });
 
-    return reply.status(201).send({
-      user,
-    });
+    return reply.status(201).send();
   } catch (error) {
     if (error instanceof UserAlreadyExistsError) {
       return reply.status(409).send({ message: error.message });
