@@ -6,12 +6,12 @@ export async function searchController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const searchGymsBodySchema = z.object({
+  const searchGymsQuerySchema = z.object({
     q: z.string(),
     page: z.coerce.number().min(1).default(1),
   });
 
-  const { q, page } = searchGymsBodySchema.parse(request.body);
+  const { q, page } = searchGymsQuerySchema.parse(request.query);
 
   const searchGymUseCase = makeSearchGymsUseCase();
 

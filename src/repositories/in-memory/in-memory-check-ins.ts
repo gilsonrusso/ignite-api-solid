@@ -1,7 +1,7 @@
+import { randomUUID } from "node:crypto";
 import dayjs from "dayjs";
 import type { CheckIn } from "generated/prisma/client.ts";
 import type { CheckInUncheckedCreateInput } from "generated/prisma/models.ts";
-import { randomUUID } from "node:crypto";
 import type { ICheckInRepository } from "../ICheckInsRepository.ts";
 
 export class InMemoryCheckInsRepository implements ICheckInRepository {
