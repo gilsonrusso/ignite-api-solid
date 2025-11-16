@@ -11,5 +11,5 @@ export async function metricsCheckInsController(
     userId: request.user.sub,
   });
 
-  return replay.status(200).send(checkInsCount);
+  return replay.status(200).send({ checkInsCount });
 }

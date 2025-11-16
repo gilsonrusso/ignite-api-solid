@@ -19,5 +19,5 @@ export async function historyCheckInsController(
     page,
   });
 
-  return replay.status(200).send(checkIns);
+  return replay.status(200).send({ checkIns });
 }

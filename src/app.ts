@@ -1,3 +1,4 @@
+import fastifyCookie from "@fastify/cookie";
 import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import fastify from "fastify";
@@ -8,6 +9,7 @@ import {
 } from "fastify-type-provider-zod";
 import { ZodError } from "zod";
 import { env } from "./env/index.ts";
+import { ckeckInsRoutes } from "./http/controllers/check-ins/routes.ts";
 import { gymsRoutes } from "./http/controllers/gyms/routes.ts";
 import { usersRoutes } from "./http/controllers/users/routes.ts";
 
@@ -15,7 +17,16 @@ export const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
+  cookie: {
+    cookieName: "refreshToken",
+    signed: false,
+  },
+  sign: {
+    expiresIn: "10m",
+  },
 });
+
+app.register(fastifyCookie);
 
 app.register(fastifyCors, {
   origin: "*",
@@ -30,6 +41,7 @@ app.get("/health", (_, replay) => {
 
 app.register(usersRoutes);
 app.register(gymsRoutes);
+app.register(ckeckInsRoutes);
 
 app.setErrorHandler((error, _request, replay) => {
   if (error instanceof ZodError) {
