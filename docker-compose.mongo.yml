@@ -1,0 +1,72 @@
+services:
+  mongo1:
+    image: mongo:latest
+    container_name: mongo1
+    command: ["mongod", "--replSet", "myReplicaSet", "--bind_ip", "localhost,mongo1"]
+    ports:
+      - "27017:27017"
+    networks:
+      - mongoCluster
+    restart: unless-stopped
+    volumes:
+      - mongo1_data:/data/db
+
+  mongo2:
+    image: mongo:latest
+    container_name: mongo2
+    command: ["mongod", "--replSet", "myReplicaSet", "--bind_ip", "localhost,mongo2"]
+    ports:
+      - "27018:27017"
+    networks:
+      - mongoCluster
+    restart: unless-stopped
+    volumes:
+      - mongo2_data:/data/db
+
+  mongo3:
+    image: mongo:latest
+    container_name: mongo3
+    command: ["mongod", "--replSet", "myReplicaSet", "--bind_ip", "localhost,mongo3"]
+    ports:
+      - "27019:27017"
+    networks:
+      - mongoCluster
+    restart: unless-stopped
+    volumes:
+      - mongo3_data:/data/db
+
+  # Serviço auxiliar para iniciar o Replica Set automaticamente
+  mongo-init-replica:
+    image: mongo:latest
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    networks:
+      - mongoCluster
+    entrypoint: ["/bin/bash", "-c"]
+    command: >
+      "
+      echo 'Aguardando MongoDB iniciar...';
+      sleep 5;
+      echo 'Inicializando Replica Set...';
+      mongosh --host mongo1:27017 --eval '
+        rs.initiate({
+          _id: \"myReplicaSet\",
+          members: [
+            {_id: 0, host: \"mongo1\"},
+            {_id: 1, host: \"mongo2\"},
+            {_id: 2, host: \"mongo3\"}
+          ]
+        })
+      ';
+      "
+
+networks:
+  mongoCluster:
+    driver: bridge
+
+volumes:
+  mongo1_data:
+  mongo2_data:
+  mongo3_data:

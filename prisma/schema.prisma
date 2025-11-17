@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -8,11 +8,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  MEMBER
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String
   email         String    @unique
   password_hash String
+  role          Role      @default(MEMBER)
   created_at    DateTime  @default(now())
   checkIns      CheckIn[]
 
@@ -23,11 +29,10 @@ model CheckIn {
   id           String    @id @default(cuid())
   created_at   DateTime  @default(now())
   validated_at DateTime?
-
-  user    User   @relation(fields: [user_id], references: [id])
-  user_id String @map("user_id")
-  gym     Gym    @relation(fields: [gym_id], references: [id])
-  gym_id  String @map("gym_id")
+  user_id      String    @map("user_id")
+  gym_id       String    @map("gym_id")
+  gym          Gym       @relation(fields: [gym_id], references: [id])
+  user         User      @relation(fields: [user_id], references: [id])
 
   @@map("check_ins")
 }
@@ -35,8 +40,8 @@ model CheckIn {
 model Gym {
   id          String    @id @default(cuid())
   title       String
-  description String
-  phone       String
+  description String?
+  phone       String?
   latitude    Float
   longitude   Float
   CheckIn     CheckIn[]
