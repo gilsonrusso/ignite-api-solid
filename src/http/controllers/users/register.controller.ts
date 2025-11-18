@@ -3,17 +3,19 @@ import { makeRegisterUseCase } from "@/use-cases/factories/makeRegisterUseCase.t
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
+export const registerBodySchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+type RegisterBody = z.infer<typeof registerBodySchema>;
+
 export async function registerController(
-  request: FastifyRequest,
+  request: FastifyRequest<{ Body: RegisterBody }>,
   reply: FastifyReply,
 ) {
-  const registerBodySchema = z.object({
-    name: z.string(),
-    email: z.email(),
-    password: z.string().min(6),
-  });
-
-  const { name, email, password } = registerBodySchema.parse(request.body);
+  const { name, email, password } = request.body;
 
   try {
     const registerUseCase = makeRegisterUseCase();

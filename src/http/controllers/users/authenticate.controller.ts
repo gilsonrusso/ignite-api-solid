@@ -3,16 +3,18 @@ import { makeAuthenticateUseCase } from "@/use-cases/factories/makeAuthenticateU
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
+export const authenticateBodySchema = z.object({
+  email: z.email(),
+  password: z.string().min(6),
+});
+
+type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>;
+
 export async function authenticateController(
-  request: FastifyRequest,
+  request: FastifyRequest<{ Body: AuthenticateBodySchema }>,
   reply: FastifyReply,
 ) {
-  const authenticateBodySchema = z.object({
-    email: z.email(),
-    password: z.string().min(6),
-  });
-
-  const { email, password } = authenticateBodySchema.parse(request.body);
+  const { email, password } = request.body;
 
   try {
     const authenticateUseCase = makeAuthenticateUseCase();
